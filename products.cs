@@ -8,5 +8,6 @@ namespace ConsoleApp1
     {
         public string name;
         public int price;
+        public int ammount;
     }
 }
