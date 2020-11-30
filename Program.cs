@@ -137,6 +137,7 @@ namespace ConsoleApp1
 
         static void showBasket(Basket basket)
         {
+            int total = 0;
             int i = 0;
             foreach (Product item in basket.products)
             {
@@ -144,7 +145,9 @@ namespace ConsoleApp1
                 Console.WriteLine("{0}. Product's name: {1}", i, item.name);
                 Console.WriteLine("   Product's price: {0}", item.price);
                 Console.WriteLine("   Product's ammount: {0}", item.ammount);
+                total = total + item.price* item.ammount;
             }
+            Console.WriteLine("   Total price: {0}", total);
         }
     }
 }
