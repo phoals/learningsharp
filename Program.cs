@@ -47,7 +47,6 @@ namespace ConsoleApp1
                     case 4:
                         Console.Clear();
                         addBasket(database, basket);
-                        Console.WriteLine("Product succesfully added to your basket");
                         Console.WriteLine();
                         Console.WriteLine();
                         break;
@@ -74,6 +73,8 @@ namespace ConsoleApp1
             product.name = Console.ReadLine();
             Console.WriteLine("Type product's price: ");
             product.price = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Type product's ammount: ");
+            product.ammount = Int32.Parse(Console.ReadLine());
             database.products.Add(product); 
         }
         static void findproduct(Database database, string name)
@@ -86,6 +87,7 @@ namespace ConsoleApp1
                     check = 1;
                     Console.WriteLine("Product's name: {0}", item.name);
                     Console.WriteLine("Product's price: {0}", item.price);
+                    Console.WriteLine("Product's ammount: {0}", item.ammount);
                 }   
             }
             if (check == 0) Console.WriteLine("There is no such product");
@@ -98,6 +100,7 @@ namespace ConsoleApp1
                 i++;
                 Console.WriteLine("{0}. Product's name: {1}", i, item.name);
                 Console.WriteLine("   Product's price: {0}",item.price);
+                Console.WriteLine("   Product's ammount: {0}", item.ammount);
             }
         }
 
@@ -112,9 +115,21 @@ namespace ConsoleApp1
                 if (name == item.name)
                 {
                     check = 1;
-                    product.name = item.name;
-                    product.price = item.price;
-                    basket.products.Add(product);
+                    Console.Write("Type an ammount of needed product: ");
+                    int amm = Int32.Parse(Console.ReadLine());
+                    if (item.ammount >= amm)
+                    {
+                        product.name = item.name;
+                        product.price = item.price;
+                        product.ammount = amm;
+                        item.ammount = item.ammount - amm;  
+                        basket.products.Add(product);
+                        Console.WriteLine("Product succesfully added to your basket");
+                    } else
+                    {
+                        Console.WriteLine("There is not enough products, try another quantity");
+                        Console.WriteLine("Ammount of product in the store: {0}", item.ammount);
+                    }
                 }
             }
             if (check == 0) Console.WriteLine("There is no such product");
@@ -128,6 +143,7 @@ namespace ConsoleApp1
                 i++;
                 Console.WriteLine("{0}. Product's name: {1}", i, item.name);
                 Console.WriteLine("   Product's price: {0}", item.price);
+                Console.WriteLine("   Product's ammount: {0}", item.ammount);
             }
         }
     }
